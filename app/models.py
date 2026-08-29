@@ -34,5 +34,5 @@ class WeeklyPrice(BaseModel):
     year = Column(Integer, nullable=False)
     week = Column(Integer, nullable=False)
     price = Column(Numeric(10, 2), nullable=False)
-    fuel = relationship()
+    fuel = relationship("Fuel")
 
