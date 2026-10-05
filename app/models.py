@@ -2,7 +2,7 @@ from app.database import BaseModel
 
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from sqlalchemy.sql.schema import Column
+from sqlalchemy.sql.schema import Column, ForeignKey
 from sqlalchemy.sql.sqltypes import (
     Integer,
     String,
@@ -17,7 +17,7 @@ class Fuel(BaseModel):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
-    description = Column(String(255), nullable=False)
+    description = Column(String(512), nullable=False)
     code = Column(String(50), nullable=False)
     measure_unit = Column(String(50), nullable=False)
     date_added = Column(DateTime, nullable=False, server_default=func.now())
@@ -34,5 +34,6 @@ class WeeklyPrice(BaseModel):
     year = Column(Integer, nullable=False)
     week = Column(Integer, nullable=False)
     price = Column(Numeric(10, 2), nullable=False)
+    fuel_id = Column(Integer, ForeignKey("fuels.id"), nullable=False)
     fuel = relationship("Fuel")
 
