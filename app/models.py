@@ -3,16 +3,10 @@ from app.database import BaseModel
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from sqlalchemy.sql.schema import Column, ForeignKey
-from sqlalchemy.sql.sqltypes import (
-    Integer,
-    String,
-    DateTime,
-    Numeric
-)
+from sqlalchemy.sql.sqltypes import Integer, String, DateTime, Numeric
 
 
 class Fuel(BaseModel):
-
     __tablename__ = "fuels"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -21,11 +15,12 @@ class Fuel(BaseModel):
     code = Column(String(50), nullable=False)
     measure_unit = Column(String(50), nullable=False)
     date_added = Column(DateTime, nullable=False, server_default=func.now())
-    date_updated = Column(DateTime, nullable=False, server_default=func.now(), onupdate=func.now())
+    date_updated = Column(
+        DateTime, nullable=False, server_default=func.now(), onupdate=func.now()
+    )
 
 
 class WeeklyPrice(BaseModel):
-
     __tablename__ = "weekly_prices"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -36,4 +31,3 @@ class WeeklyPrice(BaseModel):
     price = Column(Numeric(10, 2), nullable=False)
     fuel_id = Column(Integer, ForeignKey("fuels.id"), nullable=False)
     fuel = relationship("Fuel")
-

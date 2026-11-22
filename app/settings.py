@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     db_username: str = ""
     db_password: str = ""
     db_name: str
-    app_port:int = 8000
+    app_port: int = 8000
     db_vendor_connection_prefix: str = "postgresql+psycopg"
 
     @property
